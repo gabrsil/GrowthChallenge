@@ -3,7 +3,12 @@ const connection = require('../../database/connections');
 
 class UserController {
 
-    async index() {
+    async index(request, response) {
+
+        
+
+
+        
 
     }
 
@@ -21,11 +26,13 @@ class UserController {
 
         await axios
         .get('http://jsonplaceholder.typicode.com/users')
-        .then(async (response) => {
+        .then((response) => {
          
             
+            const users = response.data;
 
-            for(user of response.data){
+            users.forEach( async (user) => {
+
 
                 const exists = await connection('user')
                 .where('id', user.id)
@@ -70,9 +77,11 @@ class UserController {
                     company_id: respCompany[0],
                 })
 
-             
-            }
-          
+                console.log(respUser)
+
+            });
+
+
         }, (err) => {
             console.log(err)
         });

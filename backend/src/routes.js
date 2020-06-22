@@ -10,6 +10,8 @@ routes.get('/', (request, response) => {
     return response.send('Hello World');
 })
 
+routes.get('/api/posts', PostController.index);
+
 routes.get('/api/fetch/users', UserController.fetchUserApiAndSave);
 
 routes.get('/api/fetch/posts', PostController.fetchPostApiAndSave);
