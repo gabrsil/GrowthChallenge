@@ -1,27 +1,75 @@
 import React, {useState, useEffect} from 'react';
 import api from '../../services/api'
 import './styles.css';
+import {Link} from 'react-router-dom';
+
+import PostComponent from '../Posts/PostComponent/PostComponent';
+import PaginationComponent from '../Posts/PaginationComponent/PaginationComponent'
 
 
 const Posts = () => {
 
     const [posts, setPosts] = useState([]);
-
+    const [loading, setLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage, setPostsPerPage] = useState(10);
+   
 
     useEffect(() => {
-
+       
         updatePosts();
 
     }, [])
 
+
+
+
     async function updatePosts() {
-      
 
+        setLoading(true);
         const response = await api.get('/api/posts');
-        console.log(response)
+     
         setPosts(...posts, response.data.posts)
-
+        setLoading(false);
     }
+
+    async function fetchPosts() {
+
+        setLoading(true);
+        await api.get('/api/fetch/users')
+        .then((response) => {
+
+            setTimeout( async ()=> {
+                const responseUsr = await api.get('/api/posts');
+                console.log(responseUsr)
+                setPosts(responseUsr.data.posts)
+                setLoading(false);
+            }, 2000);             
+
+        }, (err) => {
+            console.log(err)
+        });
+       
+        
+          
+   
+        
+
+ 
+       
+    }
+
+
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  
+
+
+    function paginate(pageNumber ) {
+        setCurrentPage(pageNumber)
+    }
+
 
     return (
 
@@ -35,28 +83,16 @@ const Posts = () => {
                 </nav>
             </header>
             <section className="post-content">
-
-                <ul className="post-list">
-                    {
-                        posts.map(post => (
-
+                    <button onClick={() => fetchPosts()} className="reload-post-btn">Reload Posts</button>
               
-                                <li key={post.id} className="post-list-item">
-                                <span className="post-title">{post.title}</span>
-                                <p className="post-body">{post.body}</p>
-                                
-                                <span className="post-author">{post.user_id}</span>
-                              
-                               </li>
-                            
-
-                        ))
-                    }
-               
-                </ul>
-
+            <PostComponent posts={currentPosts} loading={loading}/>
  
+
+
+            <PaginationComponent loading={loading} postsPerPage={postsPerPage} currentPage={currentPage} totalPosts={posts.length} paginate={paginate}/>
             </section>
+
+
         </div>
      
     </>

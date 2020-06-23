@@ -10,7 +10,7 @@
 
 .container-posts {
     width: 100%;
-    height: 100vh;
+    min-height: 100%;
     text-align: start;
     font-family: 'Raleway', sans-serif;
     
@@ -20,10 +20,10 @@
 
 
 .post-header {
-    background-color: #fff;
+    background-color: #fafafa;
     height: 50px;
     width: 100%;
-    border-top: 6px solid rgb(54, 48, 48);
+    border-top: 7px solid #3C353D;
   
 
 }
@@ -47,6 +47,11 @@ a { text-decoration: none; }
     color: #2f2828;
     font-weight: bold;
     font-size: 1.1em;
+    transition: filter 0.3s linear;
+}
+
+.nav-header-item:hover {
+    filter: brightness(2.5);
 }
 
 
@@ -57,40 +62,33 @@ a { text-decoration: none; }
     width: 100%;
     /* height: calc(100% - 34px); */
     padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+
+    min-height: 100vh;
+ 
+    
  
 }
 
 
-.post-list {
-    list-style-type: none;
-}
-
-.post-list > .post-list-item {
-
-    width: 750px;
-    margin: 30px auto;
-    background-color: #f8f8f8;
-    padding: 18px;
-    border: 1px solid #dbdbdb;
-    border-radius: 5px;
-}
-
-.post-list-item .post-title {
+.post-content > .reload-post-btn {
+    align-self: flex-end;
+    padding: 5px 10px;
+    color: #fff;
+    width: 145px;
+    text-align: center;
+    height: 40px;
+    margin: 0 20px;
     font-weight: bold;
-    font-size: 1.1em;
-    /* ztext-transform: uppercase; */
-}
+    border-radius: 5px;
+    border: none;
+    background-color: #439529;
+    transition: 0.3s linear;
+    cursor: pointer;
+} 
 
-
-.post-list-item > .post-body {
-    
-    margin: 15px 0;
-   
-}
-
-.post-author {
-
-    font-size: 0.9em;
-    margin-left: 5px;
-
+.post-content > .reload-post-btn:hover {
+    filter: brightness(1.1);
+    transform: scale(1.1);
 }
