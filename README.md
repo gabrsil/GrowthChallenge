@@ -1,6 +1,6 @@
 * GrowthChallenge
 
-** Como Rodar 
+**Como Rodar 
 
 Clone o repositório em uma pasta de sua escolha: "git clone https://github.com/morninn/GrowthChallenge.git"
 entre na pasta backend e rode o comando "npm install" para instalar todas as dependencias. Após isso inicie o backend rodando o comando yarn dev.
