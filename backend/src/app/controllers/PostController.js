@@ -6,10 +6,11 @@ class PostController {
     async index(request, response) {
 
 
-        const posts = await connection('post')
-        .select('*');
-
-
+        let posts = await connection('post')
+        .join('user', 'post.user_id', '=', 'user.id')
+        .select('post.*', 'user.name as user_name')
+   
+     
         return response.json({
             sucess: true,
             posts

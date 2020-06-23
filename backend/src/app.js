@@ -10,16 +10,23 @@ class App {
     constructor() {
 
         this.express = express();
+        this.middlewares();
         this.routes();
+        
         this.handlers();
-
+       
 
 
     }
 
 
     routes() {
+        this.express.use(express.json());
         this.express.use(routes);
+    }
+
+    middlewares() {
+        this.express.use(cors());
     }
 
 

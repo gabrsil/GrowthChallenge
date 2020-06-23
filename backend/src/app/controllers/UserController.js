@@ -21,8 +21,7 @@ class UserController {
     
     async fetchUserApiAndSave(req, resp) {
         
-        let user;
-        let adress;
+        let userResp;
 
         await axios
         .get('http://jsonplaceholder.typicode.com/users')
@@ -65,7 +64,7 @@ class UserController {
  
                 
 
-                const respUser = await connection('user')
+                userResp = await connection('user')
                 .insert({
                     id: user.id,
                     name: user.name,
@@ -77,7 +76,7 @@ class UserController {
                     company_id: respCompany[0],
                 })
 
-                console.log(respUser)
+           
 
             });
 
@@ -88,7 +87,7 @@ class UserController {
 
   
         return resp.status(200).json({
-            sucess: true
+            sucess: true,
         })
 
     }
